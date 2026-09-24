@@ -1,20 +1,29 @@
 package mateustorres.biblioteca.database
 
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [LivroEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [LivroEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class BibliotecaDatabase : RoomDatabase() {
 
     abstract fun livroDao(): LivroDao
 
     companion object {
-        @Volatile private var INSTANCE: BibliotecaDatabase? = null
+
+        @Volatile
+        private var INSTANCE: BibliotecaDatabase? = null
 
         fun getInstance(context: Context): BibliotecaDatabase {
+
             return INSTANCE ?: synchronized(this) {
+
                 Room.databaseBuilder(
                     context.applicationContext,
                     BibliotecaDatabase::class.java,
@@ -22,7 +31,9 @@ abstract class BibliotecaDatabase : RoomDatabase() {
                 )
                     .fallbackToDestructiveMigration()
                     .build()
-                    .also { INSTANCE = it }
+                    .also {
+                        INSTANCE = it
+                    }
             }
         }
     }

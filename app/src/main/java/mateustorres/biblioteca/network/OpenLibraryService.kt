@@ -13,11 +13,16 @@ data class OpenLibraryResponse(
 
 data class BookDoc(
     val title: String,
-    @SerializedName("author_name") val authorName: List<String>?,
-    @SerializedName("first_publish_year") val firstPublishYear: Int?
+
+    @SerializedName("author_name")
+    val authorName: List<String>?,
+
+    @SerializedName("first_publish_year")
+    val firstPublishYear: Int?
 )
 
 interface OpenLibraryService {
+
     @GET("search.json")
     suspend fun buscarLivros(
         @Query("q") query: String,
@@ -26,12 +31,16 @@ interface OpenLibraryService {
 }
 
 object RetrofitClient {
+
     private const val BASE_URL = "https://openlibrary.org/"
 
     val api: OpenLibraryService by lazy {
+
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                GsonConverterFactory.create()
+            )
             .build()
             .create(OpenLibraryService::class.java)
     }

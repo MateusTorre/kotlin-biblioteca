@@ -3,7 +3,8 @@ package mateustorres.biblioteca.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import java.util.concurrent.Flow
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface LivroDao {
